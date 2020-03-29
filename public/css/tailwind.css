@@ -1,7 +1,5 @@
 @import "tailwindcss/base";
-
 @import "tailwindcss/components";
-
 @import "tailwindcss/utilities";
 
 #mapid {
@@ -10,6 +8,12 @@
 
 .table-responsive {
   overflow-x: auto;
+}
+
+.flag {
+  width: 30px;
+  height: 20px;
+  object-fit: fill;
 }
 
 table {
@@ -107,4 +111,10 @@ table {
 
 .top-show {
   display: block;
+}
+
+@media (max-width: 641px) {
+  #mapid {
+    min-height: 300px;
+  }
 }

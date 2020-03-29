@@ -18,7 +18,7 @@
       <div class="w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-gray-900 text-white">
-            <div class="font-bold md:text-xl mb-2">Confirmed</div>
+            <div class="font-bold text-sm md:text-xl mb-2">Confirmed</div>
             <h2 class="text-base counter" data-target="<%= general.cases %>">0</h2>
           </div>
         </div>
@@ -27,7 +27,7 @@
       <div class="w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-green-600 text-white">
-            <div class="font-bold md:text-xl mb-2">Recovered</div>
+            <div class="font-bold text-sm md:text-xl mb-2">Recovered</div>
             <p class="text-base counter" data-target="<%= general.recovered %>">0</p>
           </div>
         </div>
@@ -36,7 +36,7 @@
       <div class="w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-red-600 text-white">
-            <div class="font-bold md:text-xl mb-2">Deaths</div>
+            <div class="font-bold text-sm md:text-xl mb-2">Deaths</div>
             <p class="text-base counter" data-target="<%= general.deaths %>">0</p>
           </div>
         </div>
@@ -45,7 +45,7 @@
       <div class="w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-yellow-600 text-white">
-            <div class="font-bold md:text-xl mb-2">Active</div>
+            <div class="font-bold text-sm md:text-xl mb-2">Active</div>
             <p class="text-base counter" data-target="<%= general.active %>">0</p>
           </div>
         </div>
@@ -82,13 +82,14 @@
         <tbody>
           <% let totalInfectedTerritories %>
           <script>
-            let mapData = []
+            let mapData = [];
           </script>
+
 
           <% data.forEach((item, index) => { %>
           <tr>
             <td class="flex border px-4 py-2">
-              <img class="w-13 h-5 mr-1 object-contain rounded" src="<%= item.countryInfo.flag %>">
+              <img class="flag mr-1 rounded" src="<%= item.countryInfo.flag %>">
               <span class="flex justify-center w-full"><%= item.country %></span>
             </td>
             <td class="border px-4 py-2">
@@ -119,13 +120,14 @@
               <%= item.deathsPerOneMillion ? item.deathsPerOneMillion.toLocaleString() : item.deathsPerOneMillion || 0 %>
             </td>
           </tr>
-          <% totalInfectedTerritories = index+1 %>
+          <% totalInfectedTerritories = index + 1 %>
 
           <script>
             mapData.push(
-              JSON.parse('<%= JSON.stringify([item.countryInfo.lat, item.countryInfo.long, item.cases * 3.5]) %>')
+              JSON.parse('<%= JSON.stringify([item.countryInfo.lat, item.countryInfo.long, item.cases * 3]) %>')
             );
           </script>
+
           <% }); %>
         </tbody>
       </table>

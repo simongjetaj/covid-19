@@ -15,11 +15,11 @@
   "author": "Simon S. Gjetaj",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^3.0.1",
+    "ejs": "^3.0.2",
     "express": "^4.17.1",
     "leaflet": "^1.6.0",
     "moment": "^2.24.0",
-    "novelcovid": "^1.0.7-b3",
+    "novelcovid": "^1.1.2",
     "tailwindcss": "^1.2.0"
   },
   "devDependencies": {

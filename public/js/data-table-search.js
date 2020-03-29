@@ -4,8 +4,10 @@ const tr = document.querySelectorAll('tbody tr');
 
 searchInput.addEventListener("input", e => {
   removeAlert();
+  filter(e.target.value);
+});
 
-  let filter = e.target.value;
+function filter(term) {
   let found = false;
   let count = 0;
 
@@ -13,7 +15,7 @@ searchInput.addEventListener("input", e => {
     const td = tr[i].getElementsByTagName("td");
 
     for (let j = 0; j < td.length; j++) {
-      if (td[j].textContent.toLowerCase().includes(filter.toLowerCase())) {
+      if (td[j].textContent.toLowerCase().includes(term.toLowerCase())) {
         found = true;
         count++;
       }
@@ -28,9 +30,9 @@ searchInput.addEventListener("input", e => {
   }
 
   if (count === 0) {
-    outputMessage(`Sorry, we couldn't find any results matching <em>'${filter}'</em>.`);
+    outputMessage(`Sorry, we couldn't find any results matching <em>'${term}'</em>.`);
   }
-});
+}
 
 function outputMessage(msg) {
   removeAlert();
