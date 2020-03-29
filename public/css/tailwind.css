@@ -12,6 +12,12 @@
   overflow-x: auto;
 }
 
+.flag {
+  width: 30px;
+  height: 20px;
+  object-fit: fill;
+}
+
 table {
   overflow: hidden;
 }
@@ -107,4 +113,10 @@ table {
 
 .top-show {
   display: block;
+}
+
+@media (max-width: 641px) {
+  #mapid {
+    min-height: 300px;
+  }
 }
