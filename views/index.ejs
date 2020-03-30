@@ -103,7 +103,7 @@
             <td class="border px-4 py-2 <%= item.todayCases > 0 ? 'bg-red-400' : '' %>">
               <%=  item.todayDeaths ? item.todayDeaths.toLocaleString() : item.todayDeaths || 0 %>
             </td>
-            <td class="border px-4 py-2">
+            <td class="border px-4 py-2 <%= item.recovered > 0 ? 'bg-green-400' : '' %>">
               <%= item.recovered ? item.recovered.toLocaleString() : item.recovered || 0 %>
             </td>
             <td class="border px-4 py-2">
