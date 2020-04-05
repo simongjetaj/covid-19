@@ -6,7 +6,7 @@
   <span class="font-bold hidden md:block"><small>LIVE</small></span>
 </div>
 
-<div class="container mx-auto mt-5">
+<div class="container flex-grow mx-auto mt-5">
 
   <header>
     <div class="mb-4 text-center">
@@ -68,6 +68,7 @@
         <thead>
           <tr>
             <th class="px-4 py-2">Country/State</th>
+            <th class="px-4 py-2">Analysis</th>
             <th class="px-4 py-2">Total Cases</th>
             <th class="px-4 py-2">New Cases</th>
             <th class="px-4 py-2">Total Deaths</th>
@@ -85,12 +86,16 @@
             let mapData = [];
           </script>
 
-
           <% data.forEach((item, index) => { %>
           <tr>
             <td class="flex border px-4 py-2">
               <img class="flag mr-1 rounded" src="<%= item.countryInfo.flag %>">
               <span class="flex justify-center w-full"><%= item.country %></span>
+            </td>
+            <td style="border: 1px solid #e2e8f0;">
+              <a href="/<%= item.country %>" class="flex justify-center">
+                <img src="/images/icons/analysis.svg" title="<%= item.country %>'s Analysis" width="22">
+              </a>
             </td>
             <td class="border px-4 py-2">
               <%= item.cases ? item.cases.toLocaleString() : item.cases || 0 %>

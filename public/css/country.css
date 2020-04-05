@@ -1,0 +1,14 @@
+.flag {
+  width: 60px;
+  object-fit: fill;
+}
+
+.sad {
+  filter: invert(30%) sepia(39%) saturate(2127%) hue-rotate(190deg) brightness(97%) contrast(85%);
+}
+
+@media (max-width: 641px) {
+  .back {
+    padding: 0.2rem 0.3rem;
+  }
+}

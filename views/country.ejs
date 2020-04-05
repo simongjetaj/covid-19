@@ -1,0 +1,38 @@
+<%- include ('partials/header') %>
+
+<header class="text-center mt-5">
+  <div class="flex justify-center mb-3">
+    <% if (flag) { %>
+    <img class="flag mr-5 rounded" src="<%= flag %>">
+    <% } %>
+
+    <h1 class="sm:text-2xl md:text-3xl font-bold">
+      <%= country %>
+    </h1>
+  </div>
+
+  <% if(yesterdayCases || yesterdayDeaths) { %>
+  <div class="w-2/4 mx-auto">
+    <div class="flex justify-center bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+      <p class="mr-2 text-sm">Yesterday were <%= yesterdayCases ? yesterdayCases.toLocaleString() : 0 %> cases and
+        <%= yesterdayDeaths ? yesterdayDeaths.toLocaleString() : 0 %> deaths.
+      </p>
+      <img src="/images/icons/sad.svg" class="sad" width="20">
+    </div>
+  </div>
+  <% } %>
+</header>
+
+<main class="flex-grow">
+  <div class="container mx-auto mt-10 bg-gray-100 text-sm rounded sticky">
+
+    <a href="/" class="back text-sm bg-green-600 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4
+    border-green-700 hover:border-green-500 rounded">
+      Back Home
+    </a>
+    <canvas id="chart">
+    </canvas>
+  </div>
+</main>
+
+<%- include ('partials/footer') %>

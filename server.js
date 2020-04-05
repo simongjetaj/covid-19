@@ -1,31 +1,38 @@
 const express = require('express');
 const app = express();
-const {
-  NovelCovid
-} = require('novelcovid');
+const http = require('http');
+const server = http.createServer(app);
+const socketio = require('socket.io');
+const io = socketio(server);
 const path = require('path');
-app.locals.moment = require('moment');
+const moment = require('moment');
 
-const PORT = process.env.PORT || 3000;
+const indexRoutes = require("./routes/index");
+
+app.locals.moment = moment;
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/leaflet', express.static(path.join(__dirname, '/node_modules/leaflet/dist/')));
+app.use('/chart', express.static(path.join(__dirname, '/node_modules/chart.js/dist/')));
+app.use('/moment', express.static(path.join(__dirname, '/node_modules/moment/min/')));
 
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
 
-app.get('/', async (req, res) => {
-  const track = new NovelCovid();
-
-  const general = await track.all();
-  const data = await track.countries(null, 'cases');
-
-  res.render('index', {
-    general,
-    data,
-  });
+// Make io accessible to our router
+app.use((req, res, next) => {
+  req.io = io;
+  next();
 });
 
-app.listen(PORT, () => console.info(`Server running on port ${PORT}!`));
+// Requiring routes
+app.use(indexRoutes);
+
+app.get("*", async (req, res) => {
+  return res.redirect("/");
+});
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}!`));

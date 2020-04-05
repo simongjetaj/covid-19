@@ -5,10 +5,18 @@
   </h6>
 </footer>
 
+<% if (typeof page === 'undefined') { %>
 <script src="/leaflet/leaflet.js"></script>
 <script src="/js/counters.js"></script>
 <script src="/js/data-table-search.js"></script>
 <script src="/js/map.js"></script>
+<% } else { %>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/moment/moment.min.js"></script>
+<script src="/chart/Chart.min.js"></script>
+<script src="/js/chart.js"></script>
+<% } %>
+
 </body>
 
 </html>
