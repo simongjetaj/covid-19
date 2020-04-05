@@ -6,47 +6,56 @@
   <span class="font-bold hidden md:block"><small>LIVE</small></span>
 </div>
 
-<div class="container flex-grow mx-auto mt-5">
-
+<div class="container flex-grow mx-auto mt-5 p-3 md:p-0">
   <header>
     <div class="mb-4 text-center">
-      <h1 class="sm:text-2xl md:text-3xl font-bold">Tracking Coronavirus &lpar;COVID-19&rpar;</h1>
+      <h1 class="sm:text-2xl md:text-3xl font-bold">
+        Tracking Coronavirus &lpar;COVID-19&rpar;
+      </h1>
       <small>Last updated: <%= moment(general.updated).fromNow() %></small>
     </div>
     <!-- Four columns -->
-    <div class="flex items-center">
-      <div class="w-1/4">
+    <div class="flex flex-wrap justify-center items-center">
+      <div class="w-1/2 max-w-sm md:w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-gray-900 text-white">
             <div class="font-bold text-sm md:text-xl mb-2">Confirmed</div>
-            <h2 class="text-base counter" data-target="<%= general.cases %>">0</h2>
+            <h2 class="text-base counter" data-target="<%= general.cases %>">
+              0
+            </h2>
           </div>
         </div>
       </div>
 
-      <div class="w-1/4">
+      <div class="w-1/2 max-w-sm md:w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-green-600 text-white">
             <div class="font-bold text-sm md:text-xl mb-2">Recovered</div>
-            <p class="text-base counter" data-target="<%= general.recovered %>">0</p>
+            <p class="text-base counter" data-target="<%= general.recovered %>">
+              0
+            </p>
           </div>
         </div>
       </div>
 
-      <div class="w-1/4">
+      <div class="w-1/2 max-w-sm md:w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-red-600 text-white">
             <div class="font-bold text-sm md:text-xl mb-2">Deaths</div>
-            <p class="text-base counter" data-target="<%= general.deaths %>">0</p>
+            <p class="text-base counter" data-target="<%= general.deaths %>">
+              0
+            </p>
           </div>
         </div>
       </div>
 
-      <div class="w-1/4">
+      <div class="w-1/2 max-w-sm md:w-1/4">
         <div class="max-w-sm rounded overflow-hidden shadow-lg text-center">
           <div class="px-6 py-4 bg-yellow-600 text-white">
             <div class="font-bold text-sm md:text-xl mb-2">Active</div>
-            <p class="text-base counter" data-target="<%= general.active %>">0</p>
+            <p class="text-base counter" data-target="<%= general.active %>">
+              0
+            </p>
           </div>
         </div>
       </div>
@@ -54,21 +63,20 @@
   </header>
 
   <main class="my-5">
+    <form class="w-full max-w-sm">
+      <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
+        <input
+          class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          type="search" placeholder="Search..." aria-label="Search" id="search" />
+      </div>
+    </form>
 
     <div class="table-responsive">
-      <form class="w-full max-w-sm">
-        <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
-          <input
-            class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-            type="search" placeholder="Search..." aria-label="Search" id="search">
-        </div>
-      </form>
-
       <table class="table-auto rounded text-center bg-gray-100 mt-2" id="table-data">
         <thead>
           <tr>
             <th class="px-4 py-2">Country/State</th>
-            <th class="px-4 py-2">Analysis</th>
+            <th class="px-4 py-2">Histogram</th>
             <th class="px-4 py-2">Total Cases</th>
             <th class="px-4 py-2">New Cases</th>
             <th class="px-4 py-2">Total Deaths</th>
@@ -89,47 +97,59 @@
           <% data.forEach((item, index) => { %>
           <tr>
             <td class="flex border px-4 py-2">
-              <img class="flag mr-1 rounded" src="<%= item.countryInfo.flag %>">
+              <img class="flag mr-1 rounded" src="<%= item.countryInfo.flag %>" />
               <span class="flex justify-center w-full"><%= item.country %></span>
             </td>
             <td style="border: 1px solid #e2e8f0;">
               <a href="/<%= item.country %>" class="flex justify-center">
-                <img src="/images/icons/analysis.svg" title="<%= item.country %>'s Analysis" width="22">
+                <img src="/images/icons/analysis.svg" title="<%= item.country %>'s Histogram" width="22" />
               </a>
             </td>
             <td class="border px-4 py-2">
               <%= item.cases ? item.cases.toLocaleString() : item.cases || 0 %>
             </td>
             <td class="border px-4 py-2 <%= item.todayCases > 0 ? 'bg-yellow-400' : '' %>">
-              <%= item.todayCases ? item.todayCases.toLocaleString() : item.todayCases || 0 %>
+              <%= item.todayCases ? item.todayCases.toLocaleString() :
+              item.todayCases || 0 %>
             </td>
             <td class="border px-4 py-2">
-              <%= item.deaths ? item.deaths.toLocaleString() : item.deaths || 0 %>
+              <%= item.deaths ? item.deaths.toLocaleString() : item.deaths || 0
+              %>
             </td>
             <td class="border px-4 py-2 <%= item.todayCases > 0 ? 'bg-red-400' : '' %>">
-              <%=  item.todayDeaths ? item.todayDeaths.toLocaleString() : item.todayDeaths || 0 %>
+              <%= item.todayDeaths ? item.todayDeaths.toLocaleString() :
+              item.todayDeaths || 0 %>
             </td>
             <td class="border px-4 py-2">
-              <%= item.recovered ? item.recovered.toLocaleString() : item.recovered || 0 %>
+              <%= item.recovered ? item.recovered.toLocaleString() :
+              item.recovered || 0 %>
             </td>
             <td class="border px-4 py-2">
-              <%= item.active ? item.active.toLocaleString() : item.active || 0 %>
+              <%= item.active ? item.active.toLocaleString() : item.active || 0
+              %>
             </td>
             <td class="border px-4 py-2">
-              <%=  item.critical ? item.critical.toLocaleString() : item.critical || 0 %>
+              <%= item.critical ? item.critical.toLocaleString() : item.critical
+              || 0 %>
             </td>
             <td class="border px-4 py-2">
-              <%= item.casesPerOneMillion ? item.casesPerOneMillion.toLocaleString() : item.casesPerOneMillion || 0 %>
+              <%= item.casesPerOneMillion ?
+              item.casesPerOneMillion.toLocaleString() : item.casesPerOneMillion
+              || 0 %>
             </td>
             <td class="border px-4 py-2">
-              <%= item.deathsPerOneMillion ? item.deathsPerOneMillion.toLocaleString() : item.deathsPerOneMillion || 0 %>
+              <%= item.deathsPerOneMillion ?
+              item.deathsPerOneMillion.toLocaleString() :
+              item.deathsPerOneMillion || 0 %>
             </td>
           </tr>
           <% totalInfectedTerritories = index + 1 %>
 
           <script>
             mapData.push(
-              JSON.parse('<%= JSON.stringify([item.countryInfo.lat, item.countryInfo.long, item.cases * 3]) %>')
+              JSON.parse(
+                '<%= JSON.stringify([item.countryInfo.lat, item.countryInfo.long, item.cases]) %>'
+              )
             );
           </script>
 
@@ -143,7 +163,11 @@
         <path
           d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
       </svg>
-      <p>There are <em><%= totalInfectedTerritories %></em> countries, areas or territories with confirmed cases.</p>
+      <p>
+        There are <em><%= totalInfectedTerritories + 1 %></em> countries, areas
+        or territories with confirmed cases &lpar;<a href="/Kosovo"><strong class="underline">Kosovo</strong>
+          included</a>&rpar;.
+      </p>
     </div>
     <div id="mapid"></div>
 

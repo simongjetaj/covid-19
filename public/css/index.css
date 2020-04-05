@@ -16,11 +16,11 @@ table {
   overflow: hidden;
 }
 
-tr:hover {
+tbody tr:hover {
   background-color: #edf2f7;
 }
 
-td:hover {
+tbody td:hover {
   background-color: #e2e8f0;
 }
 

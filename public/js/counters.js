@@ -1,7 +1,7 @@
 const counters = document.querySelectorAll('.counter');
 const speed = 80;
 
-counters.forEach(counter => {
+counters.forEach((counter) => {
   const updateCount = () => {
     const target = parseFloat(counter.getAttribute('data-target'));
     const count = +counter.innerText;

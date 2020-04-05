@@ -7,19 +7,28 @@ const io = socketio(server);
 const path = require('path');
 const moment = require('moment');
 
-const indexRoutes = require("./routes/index");
+const indexRoutes = require('./routes/index');
 
 app.locals.moment = moment;
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/leaflet', express.static(path.join(__dirname, '/node_modules/leaflet/dist/')));
-app.use('/chart', express.static(path.join(__dirname, '/node_modules/chart.js/dist/')));
-app.use('/moment', express.static(path.join(__dirname, '/node_modules/moment/min/')));
+app.use(
+  '/leaflet',
+  express.static(path.join(__dirname, '/node_modules/leaflet/dist/'))
+);
+app.use(
+  '/chart',
+  express.static(path.join(__dirname, '/node_modules/chart.js/dist/'))
+);
+app.use(
+  '/moment',
+  express.static(path.join(__dirname, '/node_modules/moment/min/'))
+);
 
 // Set the view engine to ejs
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
 // Make io accessible to our router
 app.use((req, res, next) => {
@@ -30,8 +39,8 @@ app.use((req, res, next) => {
 // Requiring routes
 app.use(indexRoutes);
 
-app.get("*", async (req, res) => {
-  return res.redirect("/");
+app.get('*', async (req, res) => {
+  return res.redirect('/');
 });
 
 const PORT = process.env.PORT || 3000;

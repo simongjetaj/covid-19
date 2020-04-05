@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <% if (typeof page === 'undefined') { %>
+    <link rel="stylesheet" href="/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <% } else { %>
+    <link rel="stylesheet" href="/chart/Chart.min.css" />
+    <link rel="stylesheet" href="/css/country.css" />
+    <% } %>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <title>COVID-19</title>
+  </head>
 
-  <link rel="stylesheet" href="/css/styles.css" />
-  <% if (typeof page === 'undefined') { %>
-  <link rel="stylesheet" href="/leaflet/leaflet.css">
-  <link rel="stylesheet" href="/css/index.css" />
-  <% } else { %>
-  <link rel="stylesheet" href="/chart/Chart.min.css">
-  <link rel="stylesheet" href="/css/country.css" />
-  <% } %>
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <title>COVID-19</title>
-</head>
-
-<body class="flex flex-col min-h-screen bg-gray-200">
+  <body class="flex flex-col min-h-screen bg-gray-200"></body>
+</html>

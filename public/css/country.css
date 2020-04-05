@@ -4,7 +4,8 @@
 }
 
 .sad {
-  filter: invert(30%) sepia(39%) saturate(2127%) hue-rotate(190deg) brightness(97%) contrast(85%);
+  filter: invert(30%) sepia(39%) saturate(2127%) hue-rotate(190deg)
+    brightness(97%) contrast(85%);
 }
 
 @media (max-width: 641px) {

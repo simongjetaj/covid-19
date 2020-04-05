@@ -9,7 +9,7 @@ let casesDataset = {
   pointRadius: 0,
   fill: false,
   lineTension: 0,
-  borderWidth: 3
+  borderWidth: 3,
 };
 
 let deathsDataset = {
@@ -20,7 +20,7 @@ let deathsDataset = {
   pointRadius: 0,
   fill: false,
   lineTension: 0,
-  borderWidth: 3
+  borderWidth: 2,
 };
 
 let recoveriesDataset = {
@@ -31,63 +31,67 @@ let recoveriesDataset = {
   pointRadius: 0,
   fill: false,
   lineTension: 0,
-  borderWidth: 3
+  borderWidth: 4,
 };
 
-socket.on('chart', (casesTimeline, deathsTimeline, recoveriesTimeline) => {
+socket.on('chart', (casesTimeline, recoveriesTimeline, deathsTimeline) => {
   if (chart) {
     chart.destroy();
     casesDataset.data = [];
-    deathsDataset.data = [];
     recoveriesDataset.data = [];
+    deathsDataset.data = [];
   }
 
   prepareDataset(casesTimeline, 'cases');
-  prepareDataset(deathsTimeline, 'deaths');
   prepareDataset(recoveriesTimeline, 'recoveries');
+  prepareDataset(deathsTimeline, 'deaths');
 
   chart = new Chart(ctx, {
     type: 'line',
     data: {
-      datasets: [casesDataset, deathsDataset, recoveriesDataset]
+      datasets: [casesDataset, recoveriesDataset, deathsDataset],
     },
     options: {
       fill: false,
       responsive: true,
       scales: {
-        xAxes: [{
-          type: 'time',
-          distribution: 'series',
-          time: {
-            unit: 'month',
-          },
-          ticks: {
-            major: {
-              enabled: true,
-              fontStyle: 'bold'
+        xAxes: [
+          {
+            type: 'time',
+            distribution: 'series',
+            time: {
+              unit: 'month',
             },
-            source: 'data',
-            autoSkip: true,
-            autoSkipPadding: 75,
-            maxRotation: 0,
+            ticks: {
+              major: {
+                enabled: true,
+                fontStyle: 'bold',
+              },
+              source: 'data',
+              autoSkip: true,
+              autoSkipPadding: 75,
+              maxRotation: 0,
+            },
           },
-        }],
-        yAxes: [{
-          gridLines: {
-            drawBorder: false
+        ],
+        yAxes: [
+          {
+            gridLines: {
+              drawBorder: false,
+            },
+            ticks: {
+              beginAtZero: true,
+              callback: (value) => value.toLocaleString(),
+            },
           },
-          ticks: {
-            beginAtZero: true,
-            callback: value => value.toLocaleString(),
-          },
-        }],
+        ],
       },
       tooltips: {
         intersect: false,
         mode: 'index',
         callbacks: {
           title: () => {},
-          label: tooltipItem => {
+          label: (tooltipItem) => {
             let label = moment(tooltipItem.label).format('DD/MM/YYYY') || '';
 
             if (label) {
@@ -96,10 +100,10 @@ socket.on('chart', (casesTimeline, deathsTimeline, recoveriesTimeline) => {
 
             label += tooltipItem.value;
             return label;
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   });
 });
 
@@ -108,20 +112,20 @@ function prepareDataset(obj, timeline) {
     switch (timeline) {
       case 'cases':
         casesDataset.data.push({
-          x: moment(key, ["MM/DD/YY"]).format(),
-          y: value
+          x: moment(key, ['MM/DD/YY']).format(),
+          y: value,
         });
         break;
       case 'deaths':
         deathsDataset.data.push({
-          x: moment(key, ["MM/DD/YY"]).format(),
-          y: value
+          x: moment(key, ['MM/DD/YY']).format(),
+          y: value,
         });
         break;
       case 'recoveries':
         recoveriesDataset.data.push({
-          x: moment(key, ["MM/DD/YY"]).format(),
-          y: value
+          x: moment(key, ['MM/DD/YY']).format(),
+          y: value,
         });
         break;
     }
