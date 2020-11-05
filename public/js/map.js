@@ -23,7 +23,7 @@ function addCircles(map) {
       color: '#276749',
       fillColor: '#48bb78',
       fillOpacity: 0.5,
-      radius: coords[2],
+      radius: coords[2] / 8,
     }).addTo(map);
   });
 }
