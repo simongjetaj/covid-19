@@ -1,7 +1,7 @@
 const socket = io();
 const ctx = document.getElementById('chart').getContext('2d');
 let chart = null;
-let casesDataset = {
+const casesDataset = {
   label: 'Cases',
   borderColor: '#1a202c',
   data: [],
@@ -12,7 +12,7 @@ let casesDataset = {
   borderWidth: 3,
 };
 
-let deathsDataset = {
+const deathsDataset = {
   label: 'Deaths',
   borderColor: '#e53e3e',
   data: [],
@@ -23,7 +23,7 @@ let deathsDataset = {
   borderWidth: 2,
 };
 
-let recoveriesDataset = {
+const recoveriesDataset = {
   label: 'Recoveries',
   borderColor: '#38a169',
   data: [],
@@ -33,6 +33,31 @@ let recoveriesDataset = {
   lineTension: 0,
   borderWidth: 4,
 };
+
+const prepareDataset = (obj, timeline) => {
+  for (let [key, value] of Object.entries(obj)) {
+    switch (timeline) {
+      case 'cases':
+        casesDataset.data.push({
+          x: moment(key, ['MM/DD/YY']).format(),
+          y: value,
+        });
+        break;
+      case 'deaths':
+        deathsDataset.data.push({
+          x: moment(key, ['MM/DD/YY']).format(),
+          y: value,
+        });
+        break;
+      case 'recoveries':
+        recoveriesDataset.data.push({
+          x: moment(key, ['MM/DD/YY']).format(),
+          y: value,
+        });
+        break;
+    }
+  }
+}
 
 socket.on('chart', (casesTimeline, recoveriesTimeline, deathsTimeline) => {
   if (chart) {
@@ -106,28 +131,3 @@ socket.on('chart', (casesTimeline, recoveriesTimeline, deathsTimeline) => {
     },
   });
 });
-
-function prepareDataset(obj, timeline) {
-  for (let [key, value] of Object.entries(obj)) {
-    switch (timeline) {
-      case 'cases':
-        casesDataset.data.push({
-          x: moment(key, ['MM/DD/YY']).format(),
-          y: value,
-        });
-        break;
-      case 'deaths':
-        deathsDataset.data.push({
-          x: moment(key, ['MM/DD/YY']).format(),
-          y: value,
-        });
-        break;
-      case 'recoveries':
-        recoveriesDataset.data.push({
-          x: moment(key, ['MM/DD/YY']).format(),
-          y: value,
-        });
-        break;
-    }
-  }
-}

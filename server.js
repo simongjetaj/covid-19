@@ -3,9 +3,14 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const socketio = require('socket.io');
-const io = socketio(server);
 const path = require('path');
 const moment = require('moment');
+const io = socketio(server, {
+  allowRequest: (req, callback) => {
+    const noOriginHeader = req.headers.origin === undefined;
+    callback(null, noOriginHeader);
+  }
+});
 
 const indexRoutes = require('./routes/index');
 

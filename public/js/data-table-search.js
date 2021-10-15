@@ -7,7 +7,7 @@ searchInput.addEventListener('input', (e) => {
   filter(e.target.value);
 });
 
-function filter(term) {
+const filter = term => {
   // Special case Kosovo (which was not included)
   if (term.toLowerCase().includes('kosov')) {
     outputMessage(
@@ -44,7 +44,7 @@ function filter(term) {
   }
 }
 
-function outputMessage(msg) {
+const outputMessage = msg => {
   removeAlert();
 
   const div = document.createElement('div');
@@ -60,7 +60,7 @@ function outputMessage(msg) {
   document.querySelector('.table-responsive').appendChild(div);
 }
 
-function removeAlert() {
+const removeAlert = () => {
   const alert = document.querySelector('.alert');
 
   if (alert) {

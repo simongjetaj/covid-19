@@ -1,3 +1,15 @@
+const addCircles = map => {
+  mapData.forEach((coords) => {
+    L.circle([coords[0], coords[1]], {
+      color: '#276749',
+      fillColor: '#48bb78',
+      fillOpacity: 0.5,
+      radius: coords[2] / 20,
+    })
+      .addTo(map);
+  });
+}
+
 (function initMap() {
   const covid19Map = L.map('mapid').setView([40, 0], 2);
 
@@ -16,14 +28,3 @@
 
   addCircles(covid19Map);
 })();
-
-function addCircles(map) {
-  mapData.forEach((coords) => {
-    L.circle([coords[0], coords[1]], {
-      color: '#276749',
-      fillColor: '#48bb78',
-      fillOpacity: 0.5,
-      radius: coords[2] / 8,
-    }).addTo(map);
-  });
-}

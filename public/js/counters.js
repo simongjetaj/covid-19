@@ -21,7 +21,7 @@ counters.forEach((counter) => {
 (function () {
   'use strict';
 
-  function trackScroll() {
+  const trackScroll = () => {
     const scrolled = window.pageYOffset;
     const coords = document.documentElement.clientHeight;
 
@@ -34,7 +34,7 @@ counters.forEach((counter) => {
     }
   }
 
-  function backToTop() {
+  const backToTop = () => {
     if (window.pageYOffset > 0) {
       window.scrollBy(0, -80);
       setTimeout(backToTop, 0);
