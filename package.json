@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "cssnano": "^5.0.8",
-    "nodemon": "^2.0.14",
+    "nodemon": "^2.0.20",
     "postcss-cli": "^9.0.1"
   },
   "engines": {
